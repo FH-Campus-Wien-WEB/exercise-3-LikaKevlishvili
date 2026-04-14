@@ -49,8 +49,6 @@ app.get('/movies/:imdbID', function (req, res) {
   }
 });
 
-
-
 app.put('/movies/:imdbID', function(req, res) {
 
   const id = req.params.imdbID

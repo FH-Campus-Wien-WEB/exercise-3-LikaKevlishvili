@@ -89,7 +89,6 @@ function loadMovies(genre) {
   xhr.open("GET", url)
   xhr.send()
 }
-
 window.onload = function () {
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {

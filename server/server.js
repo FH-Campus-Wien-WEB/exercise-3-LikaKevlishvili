@@ -40,7 +40,6 @@ app.get('/movies/:imdbID', function (req, res) {
   const id = req.params.imdbID;
   const movies = movieModel.getMovies();
 
-  // Wir suchen den Film mit der passenden ID in der Liste
   const movie = movies.find(m => m.imdbID === id);
 
   if (movie) {

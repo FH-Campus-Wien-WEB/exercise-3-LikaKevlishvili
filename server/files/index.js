@@ -102,7 +102,6 @@ window.onload = function () {
       /* Task 1.3. Add the genre buttons to the listElement... */
       const genres = JSON.parse(xhr.responseText);
 
-      // 1. "All" Button erstellen
       const allLi = document.createElement("li");
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";

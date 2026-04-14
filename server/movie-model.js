@@ -182,7 +182,6 @@ const movies = [
   }
 ];
 
-// Diese Funktion gibt die Liste zurück (wird von server.js aufgerufen)
 function getMovies() {
   return movies;
 }

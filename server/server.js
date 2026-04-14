@@ -21,21 +21,36 @@ app.use(express.static(path.join(__dirname, 'files')));
    return only movies that have the given genre
  */
 app.get('/movies', function (req, res) {
-  let movies = Object.values(movieModel)
+  // Wir holen die Filme über die Funktion aus deinem Model
+  let movies = movieModel.getMovies();
+
+  // Task 2.2: Prüfen, ob ein Genre-Filter mitgeschickt wurde
+  const selectedGenre = req.query.genre;
+
+  if (selectedGenre) {
+    // Filtert die Liste: Nur Filme, die das gewählte Genre enthalten
+    movies = movies.filter(m => m.Genre && m.Genre.includes(selectedGenre));
+  }
+
   res.send(movies);
-})
+});
 
 // Configure a 'get' endpoint for a specific movie
 app.get('/movies/:imdbID', function (req, res) {
-  const id = req.params.imdbID
-  const exists = id in movieModel
- 
-  if (exists) {
-    res.send(movieModel[id])
+  const id = req.params.imdbID;
+  const movies = movieModel.getMovies();
+
+  // Wir suchen den Film mit der passenden ID in der Liste
+  const movie = movies.find(m => m.imdbID === id);
+
+  if (movie) {
+    res.send(movie);
   } else {
-    res.sendStatus(404)    
+    res.sendStatus(404);
   }
-})
+});
+
+
 
 app.put('/movies/:imdbID', function(req, res) {
 
@@ -52,6 +67,22 @@ app.put('/movies/:imdbID', function(req, res) {
   }
   
 })
+// Dieser Endpunkt liefert alle einzigartigen Genres deiner 15 Filme
+app.get('/genres', (req, res) => {
+  const movies = movieModel.getMovies();
+  const genreSet = new Set();
+
+  movies.forEach(movie => {
+    if (movie.Genre) {
+      // Teilt den String "Action, Drama" in einzelne Wörter auf
+      movie.Genre.split(',').forEach(g => genreSet.add(g.trim()));
+    }
+  });
+
+  // Sortiert die Genres alphabetisch
+  const sortedGenres = Array.from(genreSet).sort();
+  res.json(sortedGenres);
+});
 
 app.listen(3000)
 

@@ -19,26 +19,47 @@ function formatRuntime(runtime) {
 }
 
 function appendMovie(movie, element) {
-  new ElementBuilder("article").id(movie.imdbID)
-          .append(new ElementBuilder("img").with("src", movie.Poster))
-          .append(new ElementBuilder("h1").text(movie.Title))
-          .append(new ElementBuilder("p")
-              .append(new ElementBuilder("button").text("Edit")
-                    .listener("click", () => location.href = "edit.html?imdbID=" + movie.imdbID)))
-          .append(new ParagraphBuilder().items(
-              "Runtime " + formatRuntime(movie.Runtime),
-              "\u2022",
-              "Released on " +
-                new Date(movie.Released).toLocaleDateString("en-US")))
-          .append(new ParagraphBuilder().childClass("genre").items(movie.Genres))
-          .append(new ElementBuilder("p").text(movie.Plot))
-          .append(new ElementBuilder("h2").pluralizedText("Director", movie.Directors))
-          .append(new ListBuilder().items(movie.Directors))
-          .append(new ElementBuilder("h2").pluralizedText("Writer", movie.Writers))
-          .append(new ListBuilder().items(movie.Writers))
-          .append(new ElementBuilder("h2").pluralizedText("Actor", movie.Actors))
-          .append(new ListBuilder().items(movie.Actors))
-          .appendTo(element);
+  // Wir erstellen den Artikel
+  const article = new ElementBuilder("article").id(movie.imdbID);
+
+  // Poster hinzufügen
+  article.append(new ElementBuilder("img").with("src", movie.Poster));
+
+  // Titel
+  article.append(new ElementBuilder("h1").text(movie.Title));
+
+  // Edit Button
+  article.append(new ElementBuilder("p")
+      .append(new ElementBuilder("button").text("Edit")
+          .listener("click", () => location.href = "edit.html?imdbID=" + movie.imdbID)));
+
+  // Info Zeile: Runtime & Year (kein Date nutzen!)
+  article.append(new ElementBuilder("p").text(
+      "Runtime: " + movie.Runtime + " • Year: " + movie.Year
+  ));
+
+  // Genres (Wir teilen den String bei den Kommas)
+  if (movie.Genre) {
+    const genreParagraph = new ParagraphBuilder().childClass("genre");
+    genreParagraph.items(movie.Genre.split(",").map(g => g.trim()));
+    article.append(genreParagraph);
+  }
+
+  // Plot
+  article.append(new ElementBuilder("p").text(movie.Plot));
+
+  // Listen für Director, Writer, Actors
+  article.append(new ElementBuilder("h2").text("Director"));
+  article.append(new ListBuilder().items(movie.Director.split(",")));
+
+  article.append(new ElementBuilder("h2").text("Writer"));
+  article.append(new ListBuilder().items(movie.Writer.split(",")));
+
+  article.append(new ElementBuilder("h2").text("Actors"));
+  article.append(new ListBuilder().items(movie.Actors.split(",")));
+
+  article.appendTo(element);
+
 }
 
 function loadMovies(genre) {
@@ -62,7 +83,9 @@ function loadMovies(genre) {
 
   const url = new URL("/movies", location.href)
   /* Task 1.4. Add query parameter to the url if a genre is given */
-
+  if (genre) {
+    url.searchParams.set("genre", genre);
+  }
   xhr.open("GET", url)
   xhr.send()
 }
@@ -76,7 +99,27 @@ window.onload = function () {
       /* Task 1.3. Add the genre buttons to the listElement and 
          initialize them with a click handler that calls the 
          loadMovies(...) function above. */
+      /* Task 1.3. Add the genre buttons to the listElement... */
       const genres = JSON.parse(xhr.responseText);
+
+      // 1. "All" Button erstellen
+      const allLi = document.createElement("li");
+      const allBtn = document.createElement("button");
+      allBtn.textContent = "All";
+      allBtn.onclick = () => loadMovies();
+      allLi.appendChild(allBtn);
+      listElement.appendChild(allLi);
+
+      // 2. Genre Buttons erstellen
+      genres.forEach(genre => {
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        btn.textContent = genre;
+        btn.onclick = () => loadMovies(genre);
+        li.appendChild(btn);
+        listElement.appendChild(li);
+      });
+      const Genres = JSON.parse(xhr.responseText);
 
       /* When a first button exists, we click it to load all movies. */
       const firstButton = document.querySelector("nav button");

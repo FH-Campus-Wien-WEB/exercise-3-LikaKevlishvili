@@ -185,6 +185,7 @@ const movies = [
 function getMovies() {
   return movies;
 }
+
 // Wir exportieren die Funktion, damit andere Dateien darauf zugreifen können
 module.exports = {
   getMovies

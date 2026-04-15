@@ -18,14 +18,14 @@ function formatRuntime(runtime) {
   return hours + "h " + minutes + "m";
 }
 
+// --- Task 2.2 & 1.4: Movies laden und anzeigen ---
 function appendMovie(movie, element) {
-  // Wir erstellen den Artikel
   const article = new ElementBuilder("article").id(movie.imdbID);
 
-  // Poster hinzufügen
+  // Poster
   article.append(new ElementBuilder("img").with("src", movie.Poster));
 
-  // Titel
+  // Title
   article.append(new ElementBuilder("h1").text(movie.Title));
 
   // Edit Button
@@ -33,22 +33,23 @@ function appendMovie(movie, element) {
       .append(new ElementBuilder("button").text("Edit")
           .listener("click", () => location.href = "edit.html?imdbID=" + movie.imdbID)));
 
-  // Info Zeile: Runtime & Year (kein Date nutzen!)
+  // Info Line (Runtime & Year)
   article.append(new ElementBuilder("p").text(
       "Runtime: " + movie.Runtime + " • Year: " + movie.Year
   ));
 
-  // Genres (Wir teilen den String bei den Kommas)
+  // Genres als Kästchen (dein Wunsch-Design)
   if (movie.Genre) {
-    const genreParagraph = new ParagraphBuilder().childClass("genre");
-    genreParagraph.items(movie.Genre.split(",").map(g => g.trim()));
-    article.append(genreParagraph);
+    const genreContainer = new ElementBuilder("p").with("class", "genre");
+    movie.Genre.split(",").forEach(g => {
+      genreContainer.append(new ElementBuilder("span").text(g.trim()));
+    });
+    article.append(genreContainer);
   }
 
-  // Plot
+  // Plot, Director, Writer, Actors
   article.append(new ElementBuilder("p").text(movie.Plot));
 
-  // Listen für Director, Writer, Actors
   article.append(new ElementBuilder("h2").text("Director"));
   article.append(new ListBuilder().items(movie.Director.split(",")));
 
@@ -59,49 +60,44 @@ function appendMovie(movie, element) {
   article.append(new ListBuilder().items(movie.Actors.split(",")));
 
   article.appendTo(element);
-
 }
 
 function loadMovies(genre) {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    const mainElement = document.querySelector("main");
-
-    while (mainElement.childElementCount > 0) {
-      mainElement.firstChild.remove()
-    }
-
-    if (xhr.status === 200) {
-      const movies = JSON.parse(xhr.responseText)
-      for (const movie of movies) {
-        appendMovie(movie, mainElement)
-      }
-    } else {
-      mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
-    }
+  const mainElement = document.querySelector("main");
+  while (mainElement.childElementCount > 0) {
+    mainElement.firstChild.remove();
   }
 
-  const url = new URL("/movies", location.href)
-  /* Task 1.4. Add query parameter to the url if a genre is given */
+  const url = new URL("/movies", location.href);
   if (genre) {
     url.searchParams.set("genre", genre);
   }
-  xhr.open("GET", url)
-  xhr.send()
+
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const movies = JSON.parse(xhr.responseText);
+      for (const movie of movies) {
+        appendMovie(movie, mainElement);
+      }
+    } else {
+      mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status}`);
+    }
+  };
+  xhr.open("GET", url);
+  xhr.send();
 }
 
+// --- Task 1.3: Genres beim Laden der Seite erstellen ---
 window.onload = function () {
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {
     const listElement = document.querySelector("nav>ul");
 
     if (xhr.status === 200) {
-      /* Task 1.3. Add the genre buttons to the listElement and 
-         initialize them with a click handler that calls the 
-         loadMovies(...) function above. */
-      /* Task 1.3. Add the genre buttons to the listElement... */
       const genres = JSON.parse(xhr.responseText);
 
+      // "All" Button
       const allLi = document.createElement("li");
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";
@@ -109,7 +105,7 @@ window.onload = function () {
       allLi.appendChild(allBtn);
       listElement.appendChild(allLi);
 
-      // 2. Genre Buttons erstellen
+      // Einzelne Genre Buttons
       genres.forEach(genre => {
         const li = document.createElement("li");
         const btn = document.createElement("button");
@@ -118,15 +114,14 @@ window.onload = function () {
         li.appendChild(btn);
         listElement.appendChild(li);
       });
-      const Genres = JSON.parse(xhr.responseText);
 
-      /* When a first button exists, we click it to load all movies. */
+      // Ersten Button (All) klicken, um Filme initial zu laden
       const firstButton = document.querySelector("nav button");
       if (firstButton) {
         firstButton.click();
       }
     } else {
-      document.querySelector("body").append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
+      document.querySelector("body").append(`Fehler: ${xhr.statusText}`);
     }
   };
   xhr.open("GET", "/genres");

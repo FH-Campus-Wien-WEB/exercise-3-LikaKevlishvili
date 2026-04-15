@@ -102,34 +102,55 @@ article {
   border-radius: 16px;
   padding: 16px;
   width: 350px;
-  margin: 8px;
+  margin: 4px;
   color: #0c0c09;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+/* Kompakteres Design für die Listen in den Filmkarten */
+article ul {
+  margin: 0;           /* Entfernt den Außenabstand der Liste */
+  padding-left: 20px;  /* Kleiner Einzug für die Bullets */
+  list-style-type: disc;
+}
 
+article li {
+  margin-bottom: 2px;  /* Das ist der wichtigste Wert: minimaler Abstand zwischen den Namen */
+  font-size: 0.9em;    /* Etwas kleinere Schrift macht es noch ordentlicher */
+  line-height: 1.2;    /* Verringert die Zeilenhöhe innerhalb eines Namens */
+}
+
+/* Abstand über den Überschriften (Director, Writer etc.) anpassen */
+article h2 {
+  margin-top: 10px;    /* Kleiner Abstand vor der nächsten Sektion */
+  margin-bottom: 4px;  /* Wenig Platz zwischen Überschrift und Liste */
+  font-size: 1.1em;
+}
 /* HIER IST DIE KORREKTUR FÜR DIE GENRES */
+/* Der Behälter für die Genres */
 .genre {
-  display: flex;          /* Macht die Genres zu einer Reihe */
-  flex-wrap: wrap;        /* Falls es zu viele sind, springen sie in die nächste Zeile */
-  gap: 6px;               /* Abstand zwischen den einzelnen Genre-Kästchen */
-  border: none;           /* Entfernt den Rahmen um die ganze Gruppe */
-  background-color: transparent; /* Entfernt den dunklen Hintergrund der Gruppe */
+  display: flex;        /* Legt die Elemente nebeneinander */
+  flex-wrap: wrap;      /* Erlaubt Zeilenumbruch, falls es zu viele sind */
+  gap: 6px;             /* Abstand zwischen den Kästchen */
+  margin: 10px 0;       /* Abstand nach oben und unten */
   padding: 0;
+  list-style: none;     /* Falls es eine Liste ist, Punkte entfernen */
 }
 
-.genre span {
+/* Die einzelnen Genre-Kästchen */
+.genre span, .genre li {
   display: inline-block;
-  padding: 4px 10px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: #554e37; /* Das typische dunkle Gold/Braun */
-  color: white;
-  font-weight: bold;
-  font-size: 0.8em;
-  margin: 0;              /* Abstand wird jetzt über 'gap' im Parent gesteuert */
+  background-color: #8888; /* Das Grau aus dem Original */
+  color: white;           /* Weiße Schrift */
+  padding: 2px 8px;       /* Innenabstand */
+  border-radius: 6px;     /* Abgerundete Ecken */
+  border: 1px solid #444; /* Dunkler Rand für Kontrast */
+  font-size: 0.85em;      /* Etwas kleinere Schrift */
+  font-weight: normal;
 }
+
+
 
 img {
   border-radius: 12px;

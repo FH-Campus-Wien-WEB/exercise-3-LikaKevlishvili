@@ -10,7 +10,7 @@ const movies = [
     "Writer": "Agatha Christie, Billy Wilder",
     "Actors": "Tyrone Power, Marlene Dietrich, Charles Laughton",
     "Plot": "Ein kränklicher Anwalt übernimmt die Verteidigung eines Mannes, der des Mordes an einer reichen Witwe beschuldigt wird.",
-    "Poster": "https://image.tmdb.org/t/p/w500/96o6SreKipqD7jS3G309W693UeN.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Witness%20for%20the%20Prosecution%20(1957%20film)%20poster.jpg"
   },
   {
     "imdbID": "tt0110413",
@@ -22,7 +22,7 @@ const movies = [
     "Writer": "Luc Besson",
     "Actors": "Jean Reno, Gary Oldman, Natalie Portman",
     "Plot": "Ein Auftragskiller nimmt ein 12-jähriges Mädchen auf, nachdem ihre Familie ermordet wurde.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMzY5NDYyMmQtNjQ5OC00NjRjLThmZGMtNmRjYjFjYmJlZGFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+    "Poster": "https://upload.wikimedia.org/wikipedia/en/0/03/Leon-poster.jpg"
   },
   {
     "imdbID": "tt0082971",
@@ -34,7 +34,7 @@ const movies = [
     "Writer": "Lawrence Kasdan, George Lucas",
     "Actors": "Harrison Ford, Karen Allen, Paul Freeman",
     "Plot": "Archäologe Indiana Jones sucht die Bundeslade, bevor die Nazis sie finden können.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNTE2ODU4NDEtNmE5Ny00ZTE3LWIwYzUtYTgxYmQzYzU5MjE0XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Raiders%20of%20the%20Lost%20Ark%20Theatrical%20Poster.jpg"
   },
   {
     "imdbID": "tt0102603",
@@ -70,7 +70,7 @@ const movies = [
     "Writer": "Joseph Stefano, Robert Bloch",
     "Actors": "Anthony Perkins, Janet Leigh, Vera Miles",
     "Plot": "Eine Sekretärin flüchtet mit unterschlagenem Geld und landet in einem abgelegenen Motel.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNTQwNDM1YzItNDcyNy00N2RyLWI0ZTYtMTI3MWI3NzYwM2MwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Psycho%20%281960%29%20theatrical%20poster%20%28retouched%29.jpg"
   },
   {
     "imdbID": "tt0068646",
@@ -94,7 +94,7 @@ const movies = [
     "Writer": "Quentin Tarantino, Roger Avary",
     "Actors": "John Travolta, Uma Thurman, Samuel L. Jackson",
     "Plot": "Die Leben von zwei Auftragskillern, einem Boxer und einem Gangster-Paar verweben sich.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjA4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Pulp%20Fiction%20%281994%29%20poster.jpg"
   },
   {
     "imdbID": "tt0060176",
@@ -130,7 +130,7 @@ const movies = [
     "Writer": "Winston Groom, Eric Roth",
     "Actors": "Tom Hanks, Robin Wright, Gary Sinise",
     "Plot": "Ein Mann mit geringem IQ erlebt bedeutende historische Ereignisse.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Y2I1LTgzY2MtZDgxMTU2N2U1NjZkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Forrest%20Gump%20poster.jpg"
   },
   {
     "imdbID": "tt0133093",
@@ -142,7 +142,7 @@ const movies = [
     "Writer": "Lilly Wachowski, Lana Wachowski",
     "Actors": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
     "Plot": "Ein Hacker entdeckt die wahre Natur der Realität und schließt sich einer Rebellion an.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/The_Matrix.png"
   },
   {
     "imdbID": "tt0032553",
@@ -154,7 +154,7 @@ const movies = [
     "Writer": "Charles Chaplin",
     "Actors": "Charles Chaplin, Paulette Goddard, Jack Oakie",
     "Plot": "Ein jüdischer Friseur wird mit einem tyrannischen Diktator verwechselt.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMmExNzU2ZWMtYzUwYy00NWJiLTgwM2ItZDE2MDMwMzY0MWJjXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/The%20Great%20Dictator%20%281940%29%20poster.jpg"
   },
   {
     "imdbID": "tt0056119",
@@ -166,7 +166,7 @@ const movies = [
     "Writer": "Yasuhiko Takiguchi, Shinobu Hashimoto",
     "Actors": "Tatsuya Nakadai, Akira Ishihama, Shima Iwashita",
     "Plot": "Ein alternder Samurai bittet darum, rituellen Selbstmord auf dem Anwesen eines Clans zu begehen.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BYjBmYTQ1NjItZWU5MS00YjI0LTg2OTYtY2VjZDZkN2EwMmY0XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_SX300.jpg"
+    "Poster": "https://en.wikipedia.org/wiki/Special:FilePath/Harakiri%20Poster.jpg"
   },
   {
     "imdbID": "tt0057443",
